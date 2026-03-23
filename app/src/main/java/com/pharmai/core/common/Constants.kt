@@ -7,6 +7,12 @@ object Constants {
     const val RXNAV_BASE_URL = "https://rxnav.nlm.nih.gov/"
     const val DAILYMED_BASE_URL = "https://dailymed.nlm.nih.gov/dailymed/"
 
+    // API Keys (Add your keys here)
+    object ApiKeys {
+        const val OPENFDA_API_KEY = "" // Add your key if required
+        const val DAILYMED_API_KEY = "" // Add if required
+    }
+
     // Database
     const val DATABASE_NAME = "pharmai_database"
     const val DATABASE_VERSION = 1
@@ -17,6 +23,8 @@ object Constants {
     const val KEY_USER_ID = "user_id"
     const val KEY_BIOMETRIC_ENABLED = "biometric_enabled"
     const val KEY_DARK_MODE = "dark_mode"
+    const val KEY_REMINDER_ENABLED = "reminder_enabled"
+    const val KEY_EXPIRY_ALERT_DAYS = "expiry_alert_days"
 
     // Pagination
     const val PAGE_SIZE = 20
@@ -37,4 +45,8 @@ object Constants {
     const val EXPIRY_CHANNEL_NAME = "Expiry Alerts"
     const val NOTIFICATION_ID_REMINDER = 1001
     const val NOTIFICATION_ID_EXPIRY = 1002
+
+    // Cache
+    const val CACHE_SIZE = 10 * 1024 * 1024L // 10 MB
+    const val CACHE_MAX_AGE = 7 // days
 }
