@@ -1,4 +1,3 @@
-
 package com.pharmai.core.common.extensions
 
 import androidx.compose.foundation.clickable
@@ -12,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 
 @Composable
@@ -45,12 +45,16 @@ fun ErrorScreen(message: String, onRetry: () -> Unit) {
     }
 }
 
+@Composable
 fun Modifier.clearFocusOnKeyboardDismiss(): Modifier = composed {
+    val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
-    Modifier.clickable(
+
+    this.clickable(
         interactionSource = remember { MutableInteractionSource() },
         indication = null
     ) {
+        focusManager.clearFocus()
         keyboardController?.hide()
     }
 }

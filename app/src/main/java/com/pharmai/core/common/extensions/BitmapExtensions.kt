@@ -1,25 +1,30 @@
 package com.pharmai.core.common.extensions
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.media.ExifInterface
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 
-fun Bitmap.resize(maxSize: Int): Bitmap {
-    val width = this.width
-    val height = this.height
+fun Bitmap.rotateToCorrectOrientation(imagePath: String): Bitmap {
+    try {
+        val ei = ExifInterface(imagePath)
+        val orientation = ei.getAttributeInt(
+            ExifInterface.TAG_ORIENTATION,
+            ExifInterface.ORIENTATION_NORMAL
+        )
 
-    val ratio = if (width > height) {
-        maxSize.toFloat() / width
-    } else {
-        maxSize.toFloat() / height
+        return when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> rotate(90f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> rotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> rotate(270f)
+            else -> this
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+        return this
     }
-
-    if (ratio >= 1) return this
-
-    val newWidth = (width * ratio).toInt()
-    val newHeight = (height * ratio).toInt()
-
-    return Bitmap.createScaledBitmap(this, newWidth, newHeight, true)
 }
 
 fun Bitmap.rotate(degrees: Float): Bitmap {
@@ -28,30 +33,26 @@ fun Bitmap.rotate(degrees: Float): Bitmap {
     return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
 }
 
-fun Bitmap.toByteArray(compressFormat: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG, quality: Int = 80): ByteArray {
+fun Bitmap.resize(maxWidth: Int, maxHeight: Int): Bitmap {
+    val width = this.width
+    val height = this.height
+
+    val scaleWidth = maxWidth.toFloat() / width
+    val scaleHeight = maxHeight.toFloat() / height
+    val scale = minOf(scaleWidth, scaleHeight)
+
+    val newWidth = (width * scale).toInt()
+    val newHeight = (height * scale).toInt()
+
+    return Bitmap.createScaledBitmap(this, newWidth, newHeight, true)
+}
+
+fun Bitmap.toByteArray(quality: Int = 90): ByteArray {
     val stream = ByteArrayOutputStream()
-    compress(compressFormat, quality, stream)
+    compress(Bitmap.CompressFormat.JPEG, quality, stream)
     return stream.toByteArray()
 }
 
-fun Bitmap.toGrayscale(): Bitmap {
-    val width = this.width
-    val height = this.height
-    val grayscale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-
-    for (x in 0 until width) {
-        for (y in 0 until height) {
-            val pixel = this.getPixel(x, y)
-            val alpha = android.graphics.Color.alpha(pixel)
-            val red = android.graphics.Color.red(pixel)
-            val green = android.graphics.Color.green(pixel)
-            val blue = android.graphics.Color.blue(pixel)
-
-            val gray = (0.299 * red + 0.587 * green + 0.114 * blue).toInt()
-            val grayPixel = android.graphics.Color.argb(alpha, gray, gray, gray)
-            grayscale.setPixel(x, y, grayPixel)
-        }
-    }
-
-    return grayscale
+fun ByteArray.toBitmap(): Bitmap? {
+    return BitmapFactory.decodeByteArray(this, 0, this.size)
 }
