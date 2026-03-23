@@ -1,13 +1,8 @@
 package com.pharmai.core.common
 
-sealed class Resource<out T> {
-    data class Success<out T>(val data: T) : Resource<T>()
-    data class Error(val message: String, val throwable: Throwable? = null) : Resource<Nothing>()
-    data object Loading : Resource<Nothing>()
-
-    fun isSuccess(): Boolean = this is Success
-    fun isError(): Boolean = this is Error
-    fun isLoading(): Boolean = this is Loading
-
-    fun getOrNull(): T? = if (this is Success) data else null
+sealed class Resource<T>(val data: T? = null, val message: String? = null) {
+    class Success<T>(data: T) : Resource<T>(data)
+    class Loading<T>(data: T? = null) : Resource<T>(data)
+    class Error<T>(message: String, data: T? = null) : Resource<T>(data, message)
+    class Empty<T> : Resource<T>()
 }
