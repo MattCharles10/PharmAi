@@ -1,16 +1,15 @@
 package com.pharmai.core.common
 
 object Constants {
-
     // API Endpoints
     const val BASE_URL = "https://api.fda.gov/"
     const val RXNAV_BASE_URL = "https://rxnav.nlm.nih.gov/"
     const val DAILYMED_BASE_URL = "https://dailymed.nlm.nih.gov/dailymed/"
 
-    // API Keys (Add your keys here)
+    // API Keys
     object ApiKeys {
         const val OPENFDA_API_KEY = "" // Add your key if required
-        const val DAILYMED_API_KEY = "" // Add if required
+        const val DAILYMED_API_KEY = ""
     }
 
     // Database
