@@ -1,4 +1,4 @@
-// app/src/main/java/com/pharmai/core/common/Resource.kt
+
 package com.pharmai.core.common
 
 sealed class Resource<T>(
