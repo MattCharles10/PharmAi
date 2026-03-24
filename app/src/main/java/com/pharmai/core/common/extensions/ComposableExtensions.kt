@@ -1,60 +1,42 @@
+// app/src/main/java/com/pharmai/core/common/extensions/ComposableExtensions.kt
 package com.pharmai.core.common.extensions
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-@Composable
 fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier = composed {
-    val interactionSource = remember { MutableInteractionSource() }
     this.clickable(
-        interactionSource = interactionSource,
-        indication = null
+        indication = null,
+        interactionSource = remember { MutableInteractionSource() }
     ) {
         onClick()
     }
 }
 
 @Composable
-fun LoadingScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator()
-    }
-}
+fun LifecycleOwner.repeatOnLifecycleWhenStarted(
+    block: suspend CoroutineScope.() -> Unit
+) {
+    val lifecycleOwner = LocalLifecycleOwner.current
 
-@Composable
-fun ErrorScreen(message: String, onRetry: () -> Unit) {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = message)
-    }
-}
-
-@Composable
-fun Modifier.clearFocusOnKeyboardDismiss(): Modifier = composed {
-    val focusManager = LocalFocusManager.current
-    val keyboardController = LocalSoftwareKeyboardController.current
-
-    this.clickable(
-        interactionSource = remember { MutableInteractionSource() },
-        indication = null
-    ) {
-        focusManager.clearFocus()
-        keyboardController?.hide()
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        lifecycleOwner.lifecycleScope.launch {
+            lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                block()
+            }
+        }
     }
 }
