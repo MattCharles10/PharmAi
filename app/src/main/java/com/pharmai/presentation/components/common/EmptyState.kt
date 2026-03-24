@@ -1,7 +1,6 @@
 
 package com.pharmai.presentation.components.common
 
-import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
