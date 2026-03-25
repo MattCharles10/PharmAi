@@ -6,6 +6,7 @@ sealed class Screen(val route: String) {
     object Login : Screen("login")
     object SignUp : Screen("signup")
     object BiometricSetup : Screen("biometric_setup")
+    object ForgotPassword : Screen("forgot_password")
 
     object Main : Screen("main")
     object Home : Screen("home")
@@ -38,10 +39,14 @@ sealed class Screen(val route: String) {
         fun passId(prescriptionId: Int) = "prescription_detail/$prescriptionId"
     }
 
+    object PrescriptionGallery : Screen("prescription_gallery")
+
     object CreateReminder : Screen("create_reminder")
     object ReminderDetail : Screen("reminder_detail/{reminderId}") {
         fun passId(reminderId: Int) = "reminder_detail/$reminderId"
     }
+
+    object ReminderHistory : Screen("reminder_history")
 
     object Settings : Screen("settings")
     object MLSettings : Screen("ml_settings")
