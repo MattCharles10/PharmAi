@@ -1,4 +1,4 @@
-package com.pharmai.data.model.domain
+package com.pharmai.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
