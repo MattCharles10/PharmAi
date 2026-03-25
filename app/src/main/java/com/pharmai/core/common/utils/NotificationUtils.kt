@@ -1,4 +1,4 @@
-// app/src/main/java/com/pharmai/core/common/utils/NotificationUtils.kt
+
 package com.pharmai.core.common.utils
 
 import android.app.NotificationChannel
