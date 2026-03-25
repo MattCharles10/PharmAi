@@ -16,7 +16,8 @@ fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    loading: Boolean = false
+    loading: Boolean = false,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null
 ) {
     var scale by remember { mutableStateOf(1f) }
 
@@ -39,6 +40,14 @@ fun PrimaryButton(
                 strokeWidth = 2.dp
             )
         } else {
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
             Text(
                 text = text,
                 style = MaterialTheme.typography.labelLarge,
@@ -53,7 +62,8 @@ fun SecondaryButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    icon: androidx.compose.ui.graphics.vector.ImageVector? = null
 ) {
     OutlinedButton(
         onClick = onClick,
@@ -64,9 +74,37 @@ fun SecondaryButton(
             contentColor = MaterialTheme.colorScheme.primary
         )
     ) {
+        if (icon != null) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp)
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+        }
         Text(
             text = text,
             style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+
+@Composable
+fun TextButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+) {
+    androidx.compose.material3.TextButton(
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }
