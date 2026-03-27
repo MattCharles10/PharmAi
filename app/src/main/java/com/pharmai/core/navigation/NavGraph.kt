@@ -1,6 +1,9 @@
-// app/src/main/java/com/pharmai/core/navigation/NavGraph.kt
+
 package com.pharmai.core.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -8,7 +11,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-/*import com.pharmai.presentation.auth.LoginScreen
+
+/*
+import com.pharmai.presentation.auth.LoginScreen
 import com.pharmai.presentation.auth.SignUpScreen
 import com.pharmai.presentation.drugdetail.DrugDetailScreen
 import com.pharmai.presentation.favorites.FavoritesScreen
@@ -19,7 +24,8 @@ import com.pharmai.presentation.prescription.PrescriptionsScreen
 import com.pharmai.presentation.prescription.ScanPrescriptionScreen
 import com.pharmai.presentation.profile.ProfileScreen
 import com.pharmai.presentation.reminder.RemindersScreen
-import com.pharmai.presentation.search.SearchScreen */
+import com.pharmai.presentation.search.SearchScreen
+*/
 
 @Composable
 fun NavGraph(
@@ -30,7 +36,11 @@ fun NavGraph(
     NavHost(
         navController = navController,
         startDestination = startDestination,
-        modifier = modifier
+        modifier = modifier,
+        enterTransition = { fadeIn() + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left) },
+        exitTransition = { fadeOut() + slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left) },
+        popEnterTransition = { fadeIn() + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right) },
+        popExitTransition = { fadeOut() + slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right) }
     ) {
         // Auth Flow
         composable(Screen.Login.route) {
@@ -38,6 +48,12 @@ fun NavGraph(
         }
         composable(Screen.SignUp.route) {
           //  SignUpScreen(navController)
+        }
+        composable(Screen.BiometricSetup.route) {
+          //  BiometricSetupScreen(navController)
+        }
+        composable(Screen.ForgotPassword.route) {
+          //  ForgotPasswordScreen(navController)
         }
 
         // Main App Flow
@@ -68,16 +84,39 @@ fun NavGraph(
 
         // Drug Detail
         composable(
-            route = Screen.DrugDetail.route,
-            arguments = listOf(navArgument("drugId") { })
+            route = Screen.ReminderDetail.route,
+            arguments = listOf(navArgument("reminderId") { })
         ) { backStackEntry ->
-            val drugId = backStackEntry.arguments?.getString("drugId") ?: return@composable
-          //  DrugDetailScreen(navController, drugId)
+            val reminderId = backStackEntry.arguments?.getInt("reminderId") ?: return@composable
+            //ReminderDetailScreen(navController, reminderId)
+        }
+        composable(Screen.ReminderHistory.route) {
+            //  ReminderHistoryScreen(navController)
+        }
+
+        // Profile Settings
+        composable(Screen.Settings.route){
+           //  SettingsScreen(navController)
+        }
+
+        composable(Screen.MLSettings.route){
+           //  MLSettingsScreen(navController)
         }
 
         // Camera/ML Screens
-        composable(Screen.ScanPrescription.route) {
-          //  ScanPrescriptionScreen(navController)
+        composable(Screen.MedicineCamera.route) {
+          //  MedicineCameraScreen
         }
+
+        composable(Screen.ScanResult.route){
+            // ScanResultScreen
+        }
+
+        composable(Screen.ScanHistory.route){
+            // ScanHistoryScreen
+        }
+
+
+
     }
 }
