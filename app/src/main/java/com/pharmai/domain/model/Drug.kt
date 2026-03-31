@@ -1,5 +1,5 @@
-package com.pharmai.domain.model
 
+package com.pharmai.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -8,15 +8,15 @@ import java.util.Date
 @Parcelize
 data class Drug(
     val id: String,
-    val name: String,  // Brand name or medicine name
+    val name: String,
     val brandName: String? = null,
     val genericName: String? = null,
     val manufacturer: String? = null,
     val indications: List<String> = emptyList(),
     val warnings: List<String> = emptyList(),
     val dosage: String? = null,
-    val dosageForm: String? = null, // Tablet, Capsule, Liquid, etc.
-    val strength: String? = null, // e.g., "500mg"
+    val dosageForm: String? = null,
+    val strength: String? = null,
     val adverseReactions: List<String> = emptyList(),
     val drugInteractions: List<String> = emptyList(),
     val route: List<String> = emptyList(),
