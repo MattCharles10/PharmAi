@@ -1,4 +1,4 @@
-package com.pharmai.data.model.database.converters
+package com.pharmai.data.local.database.converters
 
 
 import androidx.room.TypeConverter
