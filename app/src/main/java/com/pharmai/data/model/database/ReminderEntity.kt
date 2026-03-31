@@ -1,4 +1,2 @@
-package com.pharmai.data.model.database
+package com.pharmai.data.model.database 
 
-class ReminderEntity {
-}
