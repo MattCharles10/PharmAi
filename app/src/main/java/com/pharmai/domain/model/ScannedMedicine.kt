@@ -1,6 +1,5 @@
+
 package com.pharmai.domain.model
-
-
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -36,36 +35,15 @@ data class DetectedFeatures(
 
 @Parcelize
 enum class ScanType : Parcelable {
-    PILL_RECOGNITION,
-    PACKAGE_RECOGNITION,
-    BARCODE_SCAN,
-    PRESCRIPTION_SCAN
+    PILL_RECOGNITION, PACKAGE_RECOGNITION, BARCODE_SCAN, PRESCRIPTION_SCAN
 }
 
 @Parcelize
 enum class PillShape : Parcelable {
-    ROUND,
-    OVAL,
-    CAPSULE_SHAPED,
-    TRIANGULAR,
-    SQUARE,
-    PENTAGON,
-    OCTAGON,
-    UNKNOWN
+    ROUND, OVAL, CAPSULE_SHAPED, TRIANGULAR, SQUARE, PENTAGON, OCTAGON, UNKNOWN
 }
 
 @Parcelize
 enum class PillColor : Parcelable {
-    WHITE,
-    YELLOW,
-    BLUE,
-    RED,
-    GREEN,
-    ORANGE,
-    BROWN,
-    PINK,
-    PURPLE,
-    GRAY,
-    MULTI_COLOR,
-    UNKNOWN
+    WHITE, YELLOW, BLUE, RED, GREEN, ORANGE, BROWN, PINK, PURPLE, GRAY, MULTI_COLOR, UNKNOWN
 }
