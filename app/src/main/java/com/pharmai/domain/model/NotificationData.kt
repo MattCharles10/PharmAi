@@ -1,6 +1,5 @@
 package com.pharmai.domain.model
 
-
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.Date
@@ -19,9 +18,5 @@ data class NotificationData(
 
 @Parcelize
 enum class NotificationType : Parcelable {
-    REMINDER,
-    EXPIRY_ALERT,
-    REFILL_REMINDER,
-    MEDICATION_INFO,
-    GENERAL
+    REMINDER, EXPIRY_ALERT, REFILL_REMINDER, MEDICATION_INFO, GENERAL
 }
