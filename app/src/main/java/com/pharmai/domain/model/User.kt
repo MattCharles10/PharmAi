@@ -38,21 +38,11 @@ data class EmergencyContact(
 
 @Parcelize
 enum class Gender : Parcelable {
-    MALE,
-    FEMALE,
-    OTHER,
-    PREFER_NOT_TO_SAY
+    MALE, FEMALE, OTHER, PREFER_NOT_TO_SAY
 }
 
 @Parcelize
 enum class BloodType : Parcelable {
-    A_POSITIVE,
-    A_NEGATIVE,
-    B_POSITIVE,
-    B_NEGATIVE,
-    O_POSITIVE,
-    O_NEGATIVE,
-    AB_POSITIVE,
-    AB_NEGATIVE,
-    UNKNOWN
+    A_POSITIVE, A_NEGATIVE, B_POSITIVE, B_NEGATIVE,
+    O_POSITIVE, O_NEGATIVE, AB_POSITIVE, AB_NEGATIVE, UNKNOWN
 }
