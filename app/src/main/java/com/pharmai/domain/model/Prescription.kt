@@ -27,8 +27,8 @@ data class PrescribedMedication(
     val id: Int,
     val drugName: String,
     val dosage: String,
-    val frequency: String, // e.g., "Twice daily", "Once daily"
-    val duration: String? = null, // e.g., "7 days", "2 weeks"
+    val frequency: String,
+    val duration: String? = null,
     val instructions: String? = null,
     val quantity: Int? = null,
     val refills: Int = 0,
