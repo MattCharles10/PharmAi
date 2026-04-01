@@ -1,4 +1,3 @@
-// app/src/main/java/com/pharmai/presentation/components/cards/DrugCard.kt
 package com.pharmai.presentation.components.cards
 
 import androidx.compose.animation.*
