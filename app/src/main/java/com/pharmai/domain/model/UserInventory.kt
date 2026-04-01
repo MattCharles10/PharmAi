@@ -1,5 +1,6 @@
 package com.pharmai.domain.model
 
+
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.util.Date
@@ -12,7 +13,7 @@ data class UserInventory(
     val name: String,
     val dosage: String,
     val quantity: Int,
-    val unit: String, // "tablets", "ml", "capsules", etc.
+    val unit: String,
     val expiryDate: Date? = null,
     val purchaseDate: Date = Date(),
     val batchNumber: String? = null,
