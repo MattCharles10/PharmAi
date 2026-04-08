@@ -5,16 +5,7 @@ import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import com.pharmai.ui.theme.Typography
 import androidx.compose.ui.platform.LocalContext
-import com.pharmai.ui.theme.Black
-import com.pharmai.ui.theme.Gray900
-import com.pharmai.ui.theme.Pink80
-import com.pharmai.ui.theme.Primary
-import com.pharmai.ui.theme.Purple80
-import com.pharmai.ui.theme.PurpleGrey80
-import com.pharmai.ui.theme.Secondary
-import com.pharmai.ui.theme.White
 
 @Composable
 fun PharmAiTheme(
