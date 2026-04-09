@@ -1,5 +1,4 @@
-package com.pharmai.data.model.api
-
+package com.pharmai.data.remote.api
 
 import com.pharmai.data.model.api.DrugResponse
 import retrofit2.http.GET
