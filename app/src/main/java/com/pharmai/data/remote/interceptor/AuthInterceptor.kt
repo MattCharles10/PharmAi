@@ -1,4 +1,4 @@
-package com.pharmai.data.model.remote.interceptor
+package com.pharmai.data.remote.interceptor
 
 import com.pharmai.core.common.Constants
 import okhttp3.Interceptor
