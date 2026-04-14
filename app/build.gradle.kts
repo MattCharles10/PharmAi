@@ -49,6 +49,10 @@ android {
         mlModelBinding = true
     }
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -58,7 +62,8 @@ android {
         jvmTarget = "17"
         freeCompilerArgs += listOf(
             "-Xopt-in=kotlin.RequiresOptIn",
-            "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+            "-Xopt-in=androidx.compose.material3.ExperimentalMaterial3Api",
+            "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi"
         )
     }
 
@@ -71,23 +76,31 @@ android {
 }
 
 dependencies {
+    // Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
-    implementation("androidx.compose.material:material-icons-extended:1.6.0")
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    // Splash Screen
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    implementation(libs.hilt.work)
+    kapt("androidx.hilt:hilt-compiler:1.1.0")
 
     // Room
     implementation(libs.room.runtime)
@@ -117,6 +130,9 @@ dependencies {
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
 
+    // ML Kit Barcode Scanning
+    implementation("com.google.mlkit:barcode-scanning:17.2.0")
+
     // Coil
     implementation(libs.coil.compose)
 
@@ -129,15 +145,21 @@ dependencies {
     // WorkManager
     implementation(libs.work.runtime.ktx)
 
+    // Timber
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
