@@ -5,7 +5,7 @@ coreKtx = "1.12.0"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2024.02.00"
-hilt = "2.50"
+hilt = "2.48"  # CHANGED: From 2.50 to 2.48 (stable, no Guice issues)
 room = "2.6.1"
 retrofit = "2.9.0"
 okhttp = "4.12.0"
@@ -38,7 +38,6 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-hilt-work = { group = "androidx.hilt", name = "hilt-work", version = "1.1.0" }
 
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }

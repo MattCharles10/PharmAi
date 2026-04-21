@@ -1,47 +1,25 @@
-
 package com.pharmai.core.di
 
-import com.pharmai.data.local.database.PharmAiDatabase
-import com.pharmai.data.local.database.dao.*
+import android.content.Context
+import androidx.room.Room
+import com.pharmai.core.Constants
+import com.pharmai.data.local.AppDatabase
+import com.pharmai.data.local.Daos
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
-
-    @Provides
-    @Singleton
-    fun provideDrugDao(database: PharmAiDatabase): DrugDao = database.drugDao()
-
-    @Provides
-    @Singleton
-    fun provideUserInventoryDao(database: PharmAiDatabase): UserInventoryDao = database.userInventoryDao()
-
-    @Provides
-    @Singleton
-    fun providePrescriptionDao(database: PharmAiDatabase): PrescriptionDao = database.prescriptionDao()
-
-    @Provides
-    @Singleton
-    fun provideReminderDao(database: PharmAiDatabase): ReminderDao = database.reminderDao()
-
-    @Provides
-    @Singleton
-    fun provideUserDao(database: PharmAiDatabase): UserDao = database.userDao()
-
-    @Provides
-    @Singleton
-    fun provideScannedMedicineDao(database: PharmAiDatabase): ScannedMedicineDao = database.scannedMedicineDao()
-
-    @Provides
-    @Singleton
-    fun provideSearchHistoryDao(database: PharmAiDatabase): SearchHistoryDao = database.searchHistoryDao()
-
-    @Provides
-    @Singleton
-    fun provideFavoriteDao(database: PharmAiDatabase): FavoriteDao = database.favoriteDao()
+    @Provides @Singleton
+    fun provideDatabase(@ApplicationContext ctx: Context) = Room.databaseBuilder(ctx, AppDatabase::class.java, Constants.DATABASE_NAME).fallbackToDestructiveMigration().build()
+    @Provides fun provideDrugDao(db: AppDatabase): Daos.DrugDao = db.drugDao()
+    @Provides fun provideInventoryDao(db: AppDatabase): Daos.InventoryDao = db.inventoryDao()
+    @Provides fun provideReminderDao(db: AppDatabase): Daos.ReminderDao = db.reminderDao()
+    @Provides fun provideScanDao(db: AppDatabase): Daos.ScanDao = db.scanDao()
+    @Provides fun provideFavoriteDao(db: AppDatabase): Daos.FavoriteDao = db.favoriteDao()
 }

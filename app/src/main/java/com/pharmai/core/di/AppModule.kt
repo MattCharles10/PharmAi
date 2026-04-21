@@ -3,8 +3,9 @@ package com.pharmai.core.di
 import android.content.Context
 import com.pharmai.core.BiometricUtils
 import com.pharmai.core.NotificationUtils
+import com.pharmai.data.local.PreferencesManager
 //import com.pharmai.data.local.PreferencesManager
-import com.pharmai.data.local.datastore.PreferencesManager
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
