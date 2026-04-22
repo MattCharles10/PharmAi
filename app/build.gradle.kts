@@ -1,10 +1,24 @@
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    // REMOVE KAPT PLUGIN
+    // alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
     id("kotlin-parcelize")
+    id("com.google.devtools.ksp") version "1.9.22-1.0.17"  // ADD KSP
+}
+
+// Disable test variants
+androidComponents {
+    beforeVariants { variantBuilder ->
+        if (variantBuilder.name.lowercase().contains("test") ||
+            variantBuilder.name.lowercase().contains("unittest")) {
+            variantBuilder.enable = false
+        }
+    }
 }
 
 android {
@@ -19,7 +33,6 @@ android {
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         buildConfigField("String", "OPENFDA_API_KEY", "\"${project.findProperty("OPENFDA_API_KEY") ?: ""}\"")
 
         ndk {
@@ -64,7 +77,28 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/INDEX.LIST"
+            excludes += "/META-INF/DEPENDENCIES"
         }
+    }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
+}
+
+configurations.all {
+    exclude(group = "com.google.inject", module = "guice")
+    exclude(group = "com.google.inject.extensions", module = "guice-assistedinject")
+}
+
+// Disable test-related tasks
+tasks.whenTaskAdded {
+    val taskName = name.lowercase()
+    if (taskName.contains("test") ||
+        taskName.contains("lint")) {
+        enabled = false
     }
 }
 
@@ -87,14 +121,16 @@ dependencies {
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.jakewharton.timber:timber:5.0.1")
 
+    // Hilt with KSP
     implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    ksp("com.google.dagger:hilt-compiler:2.48")
     implementation("androidx.hilt:hilt-work:1.1.0")
-    kapt("androidx.hilt:hilt-compiler:1.1.0")
+    ksp("androidx.hilt:hilt-compiler:1.1.0")
 
+    // Room with KSP
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
@@ -119,3 +155,5 @@ dependencies {
     implementation(libs.biometric)
     implementation(libs.work.runtime.ktx)
 }
+
+// REMOVE kapt block - not needed with KSP

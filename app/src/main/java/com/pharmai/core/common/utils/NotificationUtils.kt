@@ -1,4 +1,3 @@
-
 package com.pharmai.core.common.utils
 
 import android.app.NotificationChannel
@@ -9,8 +8,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.pharmai.MainActivity
-import com.pharmai.core.common.Constants
-
+import com.pharmai.core.Constants
 
 class NotificationUtils(private val context: Context) {
 
@@ -18,7 +16,6 @@ class NotificationUtils(private val context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = context.getSystemService(NotificationManager::class.java)
 
-            // Reminder Channel
             val reminderChannel = NotificationChannel(
                 Constants.REMINDER_CHANNEL_ID,
                 Constants.REMINDER_CHANNEL_NAME,
@@ -29,7 +26,6 @@ class NotificationUtils(private val context: Context) {
                 enableVibration(true)
             }
 
-            // Expiry Channel
             val expiryChannel = NotificationChannel(
                 Constants.EXPIRY_CHANNEL_ID,
                 Constants.EXPIRY_CHANNEL_NAME,
@@ -38,7 +34,7 @@ class NotificationUtils(private val context: Context) {
                 description = "Notifications for medicine expiry alerts"
             }
 
-            notificationManager.createNotificationChannels(listOf(reminderChannel, expiryChannel))
+            notificationManager?.createNotificationChannels(listOf(reminderChannel, expiryChannel))
         }
     }
 

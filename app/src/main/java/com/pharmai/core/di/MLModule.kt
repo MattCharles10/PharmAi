@@ -12,9 +12,38 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object MLModule {
-    @Provides @Singleton fun provideTFLiteEngine(@ApplicationContext ctx: Context) = TFLiteEngine(ctx)
-    @Provides @Singleton fun provideMedicineClassifier(@ApplicationContext ctx: Context) = MedicineClassifier(ctx)
-    @Provides @Singleton fun provideTextRecognizer(@ApplicationContext ctx: Context) = TextRecognizer(ctx)
-    @Provides @Singleton fun provideExpiryDetector(textRecognizer: TextRecognizer) = ExpiryDateDetector(textRecognizer)
-    @Provides @Singleton fun provideBarcodeScanner() = BarcodeScanner()
+
+    @Provides
+    @Singleton
+    fun provideTFLiteEngine(
+        @ApplicationContext context: Context
+    ): TFLiteEngine = TFLiteEngine(context)
+
+    @Provides
+    @Singleton
+    fun provideMedicineClassifier(
+        @ApplicationContext context: Context
+    ): MedicineClassifier = MedicineClassifier(context)
+
+    @Provides
+    @Singleton
+    fun providePackageClassifier(
+        @ApplicationContext context: Context
+    ): PackageClassifier = PackageClassifier(context)
+
+    @Provides
+    @Singleton
+    fun provideTextRecognizer(
+        @ApplicationContext context: Context
+    ): TextRecognizer = TextRecognizer(context)
+
+    @Provides
+    @Singleton
+    fun provideExpiryDateDetector(
+        textRecognizer: TextRecognizer
+    ): ExpiryDateDetector = ExpiryDateDetector(textRecognizer)
+
+    @Provides
+    @Singleton
+    fun provideBarcodeScanner(): BarcodeScanner = BarcodeScanner()
 }
