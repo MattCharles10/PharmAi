@@ -103,10 +103,12 @@ tasks.whenTaskAdded {
 }
 
 dependencies {
+    // Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
 
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
@@ -118,6 +120,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    // Splash Screen & Logging
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.jakewharton.timber:timber:5.0.1")
 
@@ -132,28 +135,80 @@ dependencies {
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
 
+    // Networking
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 
+    // Coroutines
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization.json)
 
+    // TensorFlow Lite
     implementation(libs.tensorflow.lite)
     implementation(libs.tensorflow.lite.gpu)
     implementation(libs.tensorflow.lite.support)
 
+    // CameraX
     implementation(libs.camera.camera2)
     implementation(libs.camera.lifecycle)
     implementation(libs.camera.view)
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
 
+    // Coil
     implementation(libs.coil.compose)
+    implementation("io.coil-kt:coil-gif:2.5.0")
+    implementation("io.coil-kt:coil-svg:2.5.0")
+
+    // DataStore
     implementation(libs.datastore.preferences)
+
+    // Biometric
     implementation(libs.biometric)
+
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
+    // WorkManager
     implementation(libs.work.runtime.ktx)
+
+    // ============================================
+    // PREMIUM UI DEPENDENCIES
+    // ============================================
+
+    // Accompanist - Additional Compose utilities
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.32.0")
+    implementation("com.google.accompanist:accompanist-pager:0.32.0")
+    implementation("com.google.accompanist:accompanist-permissions:0.32.0")
+
+    // Lottie Animations
+    implementation("com.airbnb.android:lottie-compose:6.1.0")
+
+    // Shimmer Loading Effect
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.2.0")
+
+    // ConstraintLayout Compose
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+    // Palette API
+    implementation("androidx.palette:palette-ktx:1.0.0")
+
+    // Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
 
 // REMOVE kapt block - not needed with KSP

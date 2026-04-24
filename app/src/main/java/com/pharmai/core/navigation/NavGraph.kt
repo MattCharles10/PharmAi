@@ -1,122 +1,34 @@
-
 package com.pharmai.core.navigation
 
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-
-/*
-import com.pharmai.presentation.auth.LoginScreen
-import com.pharmai.presentation.auth.SignUpScreen
-import com.pharmai.presentation.drugdetail.DrugDetailScreen
-import com.pharmai.presentation.favorites.FavoritesScreen
-import com.pharmai.presentation.home.HomeScreen
-import com.pharmai.presentation.inventory.InventoryScreen
-import com.pharmai.presentation.main.MainScreen
-import com.pharmai.presentation.prescription.PrescriptionsScreen
-import com.pharmai.presentation.prescription.ScanPrescriptionScreen
-import com.pharmai.presentation.profile.ProfileScreen
-import com.pharmai.presentation.reminder.RemindersScreen
-import com.pharmai.presentation.search.SearchScreen
-*/
+import com.pharmai.features.home.presentation.HomeScreen
+import com.pharmai.features.search.presentation.SearchScreen
+import com.pharmai.features.scanner.presentation.CameraScreen
+import com.pharmai.features.inventory.presentation.InventoryScreen
+import com.pharmai.features.profile.presentation.ProfileScreen
+import com.pharmai.features.reminders.presentation.RemindersScreen
+import com.pharmai.features.search.presentation.DrugDetailScreen
+import com.pharmai.features.scanner.presentation.ScanResultScreen
 
 @Composable
-fun NavGraph(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.Home.route
-) {
-    NavHost(
-        navController = navController,
-        startDestination = startDestination,
-        modifier = modifier,
-        enterTransition = { fadeIn() + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left) },
-        exitTransition = { fadeOut() + slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left) },
-        popEnterTransition = { fadeIn() + slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right) },
-        popExitTransition = { fadeOut() + slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right) }
-    ) {
-        // Auth Flow
-        composable(Screen.Login.route) {
-           // LoginScreen(navController)
+fun PharmAiNavGraph(navController: NavHostController, startDestination: String = Destination.Home.route) {
+    NavHost(navController = navController, startDestination = startDestination) {
+        composable(Destination.Home.route) { HomeScreen(navController) }
+        composable(Destination.Search.route) { SearchScreen(navController) }
+        composable(Destination.Scanner.route) { CameraScreen(navController) }
+        composable(Destination.Inventory.route) { InventoryScreen(navController) }
+        composable(Destination.Profile.route) { ProfileScreen(navController) }
+        composable(Destination.Reminders.route) { RemindersScreen(navController) }
+        composable(Destination.DrugDetail.route, arguments = listOf(navArgument("drugId") { type = NavType.StringType })) {
+            DrugDetailScreen(navController, it.arguments?.getString("drugId") ?: "")
         }
-        composable(Screen.SignUp.route) {
-          //  SignUpScreen(navController)
+        composable(Destination.ScanResult.route, arguments = listOf(navArgument("scanId") { type = NavType.StringType })) {
+            ScanResultScreen(navController, it.arguments?.getString("scanId") ?: "")
         }
-        composable(Screen.BiometricSetup.route) {
-          //  BiometricSetupScreen(navController)
-        }
-        composable(Screen.ForgotPassword.route) {
-          //  ForgotPasswordScreen(navController)
-        }
-
-        // Main App Flow
-        composable(Screen.Main.route) {
-           // MainScreen(navController)
-        }
-        composable(Screen.Home.route) {
-           // HomeScreen(navController)
-        }
-        composable(Screen.Search.route) {
-          //  SearchScreen(navController)
-        }
-        composable(Screen.Inventory.route) {
-           // InventoryScreen(navController)
-        }
-        composable(Screen.Prescriptions.route) {
-           // PrescriptionsScreen(navController)
-        }
-        composable(Screen.Profile.route) {
-           // ProfileScreen(navController)
-        }
-        composable(Screen.Favorites.route) {
-           // FavoritesScreen(navController)
-        }
-        composable(Screen.Reminders.route) {
-           // RemindersScreen(navController)
-        }
-
-        // Drug Detail
-        composable(
-            route = Screen.ReminderDetail.route,
-            arguments = listOf(navArgument("reminderId") { })
-        ) { backStackEntry ->
-            val reminderId = backStackEntry.arguments?.getInt("reminderId") ?: return@composable
-            //ReminderDetailScreen(navController, reminderId)
-        }
-        composable(Screen.ReminderHistory.route) {
-            //  ReminderHistoryScreen(navController)
-        }
-
-        // Profile Settings
-        composable(Screen.Settings.route){
-           //  SettingsScreen(navController)
-        }
-
-        composable(Screen.MLSettings.route){
-           //  MLSettingsScreen(navController)
-        }
-
-        // Camera/ML Screens
-        composable(Screen.MedicineCamera.route) {
-          //  MedicineCameraScreen
-        }
-
-        composable(Screen.ScanResult.route){
-            // ScanResultScreen
-        }
-
-        composable(Screen.ScanHistory.route){
-            // ScanHistoryScreen
-        }
-
-
-
     }
 }

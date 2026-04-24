@@ -1,7 +1,11 @@
 package com.pharmai.core.di
 
 import android.content.Context
-import com.pharmai.ml.*
+import com.pharmai.features.scanner.ml.BarcodeScanner
+import com.pharmai.features.scanner.ml.ExpiryDateDetector
+import com.pharmai.features.scanner.ml.MedicineClassifier
+import com.pharmai.features.scanner.ml.TFLiteEngine
+import com.pharmai.features.scanner.ml.TextRecognizer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,33 +21,37 @@ object MLModule {
     @Singleton
     fun provideTFLiteEngine(
         @ApplicationContext context: Context
-    ): TFLiteEngine = TFLiteEngine(context)
+    ): TFLiteEngine {
+        return TFLiteEngine(context)
+    }
 
     @Provides
     @Singleton
     fun provideMedicineClassifier(
         @ApplicationContext context: Context
-    ): MedicineClassifier = MedicineClassifier(context)
-
-    @Provides
-    @Singleton
-    fun providePackageClassifier(
-        @ApplicationContext context: Context
-    ): PackageClassifier = PackageClassifier(context)
+    ): MedicineClassifier {
+        return MedicineClassifier(context)
+    }
 
     @Provides
     @Singleton
     fun provideTextRecognizer(
         @ApplicationContext context: Context
-    ): TextRecognizer = TextRecognizer(context)
+    ): TextRecognizer {
+        return TextRecognizer(context)
+    }
 
     @Provides
     @Singleton
     fun provideExpiryDateDetector(
         textRecognizer: TextRecognizer
-    ): ExpiryDateDetector = ExpiryDateDetector(textRecognizer)
+    ): ExpiryDateDetector {
+        return ExpiryDateDetector(textRecognizer)
+    }
 
     @Provides
     @Singleton
-    fun provideBarcodeScanner(): BarcodeScanner = BarcodeScanner()
+    fun provideBarcodeScanner(): BarcodeScanner {
+        return BarcodeScanner()
+    }
 }

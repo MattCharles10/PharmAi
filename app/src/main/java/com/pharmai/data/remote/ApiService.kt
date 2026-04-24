@@ -1,11 +1,8 @@
 package com.pharmai.data.remote
 
-import retrofit2.http.GET
-import retrofit2.http.Query
-
 object ApiService {
     interface DrugApi {
-        @GET("drug/label.json")
-        suspend fun searchDrugs(@Query("search") query: String, @Query("limit") limit: Int = 20): DrugResponse
+        @retrofit2.http.GET("drug/label.json")
+        suspend fun searchDrugs(@retrofit2.http.Query("search") query: String, @retrofit2.http.Query("limit") limit: Int = 20): DrugResponse
     }
 }

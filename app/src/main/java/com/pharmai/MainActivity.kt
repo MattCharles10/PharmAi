@@ -9,24 +9,19 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
-import com.pharmai.core.Navigation
-import com.pharmai.presentation.theme.PharmAiTheme
+import com.pharmai.core.navigation.PharmAiNavGraph
+import com.pharmai.core.theme.PharmAiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-
         setContent {
             PharmAiTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Navigation.NavGraph(navController = rememberNavController())
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    PharmAiNavGraph(navController = rememberNavController())
                 }
             }
         }
