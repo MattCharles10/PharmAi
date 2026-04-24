@@ -1,0 +1,37 @@
+﻿{
+  "pill_classifier": {
+    "model_name": "pill_classifier",
+    "input_size": 224,
+    "input_channels": 3,
+    "input_type": "float32",
+    "output_classes": 15,
+    "model_version": "1.0.0",
+    "description": "Pill classification model for identifying common medicines from images",
+    "training_dataset": "NIH Pill Image Dataset",
+    "accuracy": 0.92,
+    "last_trained": "2024-01-15"
+  },
+  "package_classifier": {
+    "model_name": "package_classifier",
+    "input_size": 224,
+    "input_channels": 3,
+    "input_type": "float32",
+    "output_classes": 8,
+    "model_version": "1.0.0",
+    "description": "Medicine package/barcode classification model",
+    "training_dataset": "Pharma Packaging Dataset",
+    "accuracy": 0.88,
+    "last_trained": "2024-01-15"
+  },
+  "text_detector": {
+    "model_name": "text_detector",
+    "input_size": 320,
+    "input_channels": 3,
+    "input_type": "float32",
+    "model_version": "1.0.0",
+    "description": "OCR text detection model for reading expiry dates and batch numbers",
+    "training_dataset": "Synthetic Pharma Text Dataset",
+    "accuracy": 0.95,
+    "last_trained": "2024-01-15"
+  }
+}

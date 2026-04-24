@@ -1,0 +1,15 @@
+﻿Acetaminophen
+Paracetamol
+Ibuprofen
+Amoxicillin
+Metformin
+Omeprazole
+Aspirin
+Acetylsalicylic Acid
+Cetirizine
+Atorvastatin
+Simvastatin
+Loratadine
+Metronidazole
+Vitamin D3
+Vitamin B12

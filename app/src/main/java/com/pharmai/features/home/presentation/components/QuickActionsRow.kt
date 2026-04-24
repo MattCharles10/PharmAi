@@ -20,6 +20,7 @@ fun QuickActionsRow(
     onSearch: () -> Unit,
     onInventory: () -> Unit,
     onReminders: () -> Unit,
+    onPrescriptions: () -> Unit = {},  // ADDED: Optional callback
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -28,13 +29,14 @@ fun QuickActionsRow(
         elevation = CardDefaults.cardElevation(2.dp)
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             QuickActionButton(Icons.Default.QrCodeScanner, "Scan", onScan)
             QuickActionButton(Icons.Default.Search, "Search", onSearch)
             QuickActionButton(Icons.Default.Inventory, "Inventory", onInventory)
             QuickActionButton(Icons.Default.Notifications, "Reminders", onReminders)
+            QuickActionButton(Icons.Default.Description, "Prescriptions", onPrescriptions)  // ADDED
         }
     }
 }
@@ -43,14 +45,18 @@ fun QuickActionsRow(
 private fun QuickActionButton(icon: ImageVector, label: String, onClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable(onClick = onClick)
+        modifier = Modifier
+            .clickable(onClick = onClick)
+            .padding(horizontal = 2.dp)
     ) {
         Box(
-            modifier = Modifier.size(48.dp).clip(RoundedCornerShape(12.dp))
+            modifier = Modifier
+                .size(44.dp)
+                .clip(RoundedCornerShape(12.dp))
                 .background(MaterialTheme.colorScheme.primaryContainer),
             contentAlignment = Alignment.Center
         ) {
-            Icon(icon, label, modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.primary)
+            Icon(icon, label, modifier = Modifier.size(22.dp), tint = MaterialTheme.colorScheme.primary)
         }
         Spacer(modifier = Modifier.height(4.dp))
         Text(label, style = MaterialTheme.typography.labelSmall)

@@ -39,6 +39,8 @@ sealed class Destination(val route: String) {
     }
     data object ReminderDetail : Destination("reminder_detail/{reminderId}") {
         fun createRoute(reminderId: Long) = "reminder_detail/$reminderId"
+        fun createRoute(medicineId: Long? = null) = "create_reminder/${medicineId ?: ""}"
+
     }
     data object AddMedicine : Destination("add_medicine")
     data object EditMedicine : Destination("edit_medicine/{medicineId}") {
@@ -50,4 +52,6 @@ sealed class Destination(val route: String) {
     }
     data object ExpiryAlerts : Destination("expiry_alerts")
     data object ReminderHistory : Destination("reminder_history")
+
+
 }

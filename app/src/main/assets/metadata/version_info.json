@@ -1,0 +1,27 @@
+﻿{
+  "app_version": "1.0.0",
+  "model_version": "1.0.0",
+  "last_updated": "2024-01-15",
+  "compatible_app_versions": ["1.0.0"],
+  "min_app_version": "1.0.0",
+  "models": {
+    "pill_classifier": {
+      "version": "1.0.0",
+      "file": "pill_classifier.tflite",
+      "size_bytes": 5242880,
+      "checksum": "placeholder"
+    },
+    "package_classifier": {
+      "version": "1.0.0",
+      "file": "package_classifier.tflite",
+      "size_bytes": 3145728,
+      "checksum": "placeholder"
+    },
+    "text_detector": {
+      "version": "1.0.0",
+      "file": "text_detector.tflite",
+      "size_bytes": 2097152,
+      "checksum": "placeholder"
+    }
+  }
+}
